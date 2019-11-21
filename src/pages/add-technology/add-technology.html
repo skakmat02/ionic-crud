@@ -1,0 +1,114 @@
+<ion-header>
+   <ion-navbar>
+      <ion-title>{{ pageTitle }}</ion-title>
+   </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+   <div>
+      <ion-item *ngIf="isEdited && !hideForm">
+         <button
+            ion-button
+            item-right
+            color="secondary"
+            text-center
+            block
+            (click)="deleteEntry()">Remove this Entry?</button>
+      </ion-item>
+
+
+      <div *ngIf="hideForm">
+         <ion-item class="post-entry-message" text-wrap>
+            <h2>Success!</h2>
+            <p>Maybe you'd like to edit an existing entry or add a new record?</p>
+            <p>Simply go back to the home page and select the option you want to pursue.</p>
+         </ion-item>
+      </div>
+
+
+      <div *ngIf="!hideForm">
+         <form [formGroup]="form" (ngSubmit)="saveEntry()">
+
+            <ion-list>
+			
+               <ion-item>
+                  <ion-label floating>Nama *</ion-label>
+                  <ion-input
+                        type="text"
+                        formControlName="nama"
+                        [(ngModel)]="technologyName"></ion-input>
+                  
+               </ion-item>
+
+               <ion-item>
+                    <ion-label floating>Type *</ion-label>
+                    <ion-select formControlName="jenis_barang" [(ngModel)]="technologyType">
+                        <ion-option value="Hardware" checked="true">Hardware</ion-option>
+                        <ion-option value="Software">Software</ion-option>
+                        
+                    </ion-select>
+                </ion-item>
+			   
+			   <ion-item>
+                  <ion-label floating>Description *</ion-label>
+                  
+                     <ion-textarea
+                       
+                        formControlName="detail"
+                        rows="6"
+                        [(ngModel)]="technologyDescription"></ion-textarea>
+                 
+               </ion-item>
+			   
+			   <ion-item>
+                  <ion-label floating>Quantity *</ion-label>
+                 
+                     <ion-input
+                       
+                        formControlName="jumlah"
+                        rows="6"
+                        [(ngModel)]="technologyQuantity"></ion-input>
+                  </ion-item>
+              
+			   
+			   <ion-item>
+                  <ion-label floating>Location *</ion-label>
+                 
+                     <ion-input
+                        placeholder="Location..."
+                        formControlName="lokasi"
+                        rows="6"
+                        [(ngModel)]="technologyLocation"></ion-input>
+                  </ion-item>
+              
+			   <ion-item>
+                    <ion-label floating>Status *</ion-label>
+                    <ion-select formControlName="statuse" [(ngModel)]="technologyStatus">
+                        <ion-option value="Pinjam" checked="true">Pinjam</ion-option>
+                        <ion-option value="Hibah">Hibah</ion-option>
+                        <ion-option value="Jual">Jual</ion-option>
+                        <ion-option value="Gudang">Gudang</ion-option>
+                    </ion-select>
+                </ion-item>
+			   
+
+
+               <ion-item>
+                  <button
+                     ion-button
+                     color="primary"
+                     text-center
+                     block
+                     [disabled]="!form.valid">Save Entry</button>
+               </ion-item>
+
+            </ion-list>
+
+         </form>
+      </div>
+   </div>
+
+
+</ion-content>
